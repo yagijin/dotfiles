@@ -1,0 +1,9 @@
+{
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoBuild.run": "never",
+  "workbench.statusBar.visible": true,
+  "editor.tabSize": 2,
+  "editor.renderControlCharacters": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true
+}
