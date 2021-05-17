@@ -5,6 +5,13 @@ source ~/.nvm/nvm.sh
 alias ls="ls -Fh -G"
 alias la="ls -a"
 alias g="git"
+alias gl="git log"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gca="git commit --amend"
+alias gpl="git pull"
+alias gps="git push"
 alias rm="echo 'use mv instead of rm'"
 
 #ipの確認
