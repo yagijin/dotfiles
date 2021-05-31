@@ -35,6 +35,21 @@ google() {
     open -a Google\ Chrome http://www.google.co.jp/$opt
 }
 
+# ghq + pecoの設定
+export GOPATH=$HOME
+export PATH=$PATH:$GOPATH/bin
+
+function peco-src () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    BUFFER="cd ${selected_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N peco-src
+bindkey '^]' peco-src
+
 # tabでコマンドのオプションやファイル名を保管してくれる
 autoload -U compinit
 compinit -u
