@@ -16,4 +16,8 @@ oh my zshは使わない方針
 ## 指定したディレクトリにシンボリックリンクを追加する(-fで強制上書きも可能)
 `ln -s ファイル名 ディレクトリ`
 
+## ghq
+https://github.com/x-motemen/ghq
+https://github.com/Songmu/ghq-handbooks
+
 
