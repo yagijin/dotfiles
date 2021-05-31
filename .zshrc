@@ -17,7 +17,7 @@ alias gca="git commit --amend"
 alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
-alias rm="echo 'use mv instead of rm'"
+#alias rm="echo 'use mv instead of rm'"
 
 #ipの確認
 alias gip="curl http://ipecho.net/plain; echo"

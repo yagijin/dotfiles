@@ -7,7 +7,8 @@ oh my zshは使わない方針
 ## .vscode
 
 `code --list-extensions > .extensions`で拡張機能一覧を.extensionsに出力  
-.extensionsと同じディレクトリでinstall_extensions.shを実行して拡張機能をインストール
+.extensionsと同じディレクトリでinstall_extensions.shを実行して拡張機能をインストール  
+~/Library/Application Support/Code/User/setting.jsonをシンボリックリンクにする
 
 ## starship.toml
 
@@ -17,7 +18,7 @@ oh my zshは使わない方針
 `ln -s ファイル名 ディレクトリ`
 
 ## ghq
-https://github.com/x-motemen/ghq
+https://github.com/x-motemen/ghq  
 https://github.com/Songmu/ghq-handbooks
 
 
