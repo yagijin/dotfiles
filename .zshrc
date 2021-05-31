@@ -1,7 +1,7 @@
 
 # .zshrc.localに切り出したPC固有の処理を読み込む
-if [ -f ~/Documents/setting_files/.zshrc.local ]; then
-    source ~/Documents/setting_files/.zshrc.local
+if [ -f ~/src/github.com/yagijin/setting_files/.zshrc.local ]; then
+    source ~/src/github.com/yagijin/setting_files/.zshrc.local
 fi
 
 # 各エイリアス
