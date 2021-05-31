@@ -1,4 +1,8 @@
-source ~/.nvm/nvm.sh
+
+# .zshrc.localに切り出したPC固有の処理を読み込む
+if [ -f ~/Documents/setting_files/.zshrc.local ]; then
+    source ~/Documents/setting_files/.zshrc.local
+fi
 
 # 各エイリアス
 #ls時にフォルダとファイルを色分けしてわかりやすくする
@@ -12,6 +16,7 @@ alias gc="git commit -m"
 alias gca="git commit --amend"
 alias gpl="git pull"
 alias gps="git push"
+alias gco="git checkout"
 alias rm="echo 'use mv instead of rm'"
 
 #ipの確認
