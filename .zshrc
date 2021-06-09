@@ -17,6 +17,7 @@ alias gca="git commit --amend"
 alias gpl="git pull"
 alias gps="git push"
 alias gco="git checkout"
+alias ggl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 #alias rm="echo 'use mv instead of rm'"
 
 #ipの確認
