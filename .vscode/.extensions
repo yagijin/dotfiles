@@ -1,8 +1,12 @@
 be5invis.toml
 bierner.markdown-preview-github-styles
 cloudlatex.cloudlatex
+dbaeumer.vscode-eslint
 denoland.vscode-deno
+esbenp.prettier-vscode
+GitHub.vscode-pull-request-github
 James-Yu.latex-workshop
+mgmcdermott.vscode-language-babel
 mhutchie.git-graph
 mosapride.zenkaku
 ms-azuretools.vscode-docker
@@ -10,7 +14,11 @@ ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vsliveshare.vsliveshare
+msjsdiag.debugger-for-chrome
 octref.vetur
+rebornix.ruby
 ritwickdey.LiveServer
 sidthesloth.html5-boilerplate
 streetsidesoftware.code-spell-checker
+tonybaloney.vscode-pets
+wingrunr21.vscode-ruby
