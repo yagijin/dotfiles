@@ -1,5 +1,9 @@
+alexcvzz.vscode-sqlite
 be5invis.toml
 bierner.markdown-preview-github-styles
+bung87.rails
+bung87.vscode-gemfile
+castwide.solargraph
 cloudlatex.cloudlatex
 dbaeumer.vscode-eslint
 denoland.vscode-deno
@@ -13,11 +17,13 @@ ms-azuretools.vscode-docker
 ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
+ms-vscode.vscode-typescript-next
 ms-vsliveshare.vsliveshare
 msjsdiag.debugger-for-chrome
 octref.vetur
 rebornix.ruby
 ritwickdey.LiveServer
+sianglim.slim
 sidthesloth.html5-boilerplate
 streetsidesoftware.code-spell-checker
 tonybaloney.vscode-pets
