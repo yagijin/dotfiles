@@ -6,5 +6,11 @@
   "editor.renderControlCharacters": true,
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "editor.inlineSuggest.enabled": true,
+  "workbench.colorTheme": "Monokai",
+  "workbench.iconTheme": "vscode-icons",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "npm.enableRunFromFolder": true,
+  "editor.minimap.enabled": false
 }

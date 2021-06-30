@@ -7,7 +7,9 @@ castwide.solargraph
 cloudlatex.cloudlatex
 dbaeumer.vscode-eslint
 denoland.vscode-deno
+eamodio.gitlens
 esbenp.prettier-vscode
+GitHub.copilot
 GitHub.vscode-pull-request-github
 James-Yu.latex-workshop
 mgmcdermott.vscode-language-babel
@@ -23,8 +25,10 @@ msjsdiag.debugger-for-chrome
 octref.vetur
 rebornix.ruby
 ritwickdey.LiveServer
+ryu1kn.partial-diff
 sianglim.slim
 sidthesloth.html5-boilerplate
 streetsidesoftware.code-spell-checker
 tonybaloney.vscode-pets
+vscode-icons-team.vscode-icons
 wingrunr21.vscode-ruby
