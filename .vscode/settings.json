@@ -12,5 +12,5 @@
   "workbench.iconTheme": "vscode-icons",
   "diffEditor.ignoreTrimWhitespace": false,
   "npm.enableRunFromFolder": true,
-  "editor.minimap.enabled": false
+  "editor.minimap.enabled": false,
 }
