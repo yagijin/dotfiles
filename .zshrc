@@ -76,3 +76,19 @@ eval "$(starship init zsh)"
 
 #thefuckの読み込み
 eval $(thefuck --alias)
+
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
