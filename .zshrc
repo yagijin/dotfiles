@@ -36,20 +36,33 @@ google() {
     open -a Google\ Chrome http://www.google.co.jp/$opt
 }
 
-# ghq + pecoの設定
+# ghq + fzfの設定
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 
-function peco-src () {
-  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
-  if [ -n "$selected_dir" ]; then
-    BUFFER="cd ${selected_dir}"
+function ghq_list_cd() {
+  local destination_dir="$(ghq list -p | fzf --ansi --preview "head -100 {}/README.*")"
+  if [ -n "$destination_dir" ]; then
+    BUFFER="cd ${destination_dir}"
     zle accept-line
   fi
   zle clear-screen
 }
-zle -N peco-src
-bindkey '^]' peco-src
+zle -N ghq_list_cd
+bindkey '^]' ghq_list_cd
+
+# fzfを使った関数
+fbr() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+alias fzc="fzf --preview 'head -100 {}'"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--height 100% --reverse --border'
 
 # tabでコマンドのオプションやファイル名を保管してくれる
 autoload -U compinit
@@ -76,19 +89,3 @@ eval "$(starship init zsh)"
 
 #thefuckの読み込み
 eval $(thefuck --alias)
-
-fbr() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-}
-
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
