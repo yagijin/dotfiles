@@ -42,7 +42,7 @@ export PATH=$PATH:$GOPATH/bin
 
 # ghqの管理フォルダにfzfで簡単に移動できるようにする
 function ghq_list_cd() {
-  local destination_dir="$(ghq list -p | fzf --preview "head -100 {}/README.*")"
+  local destination_dir="$(ghq list -p | fzf --preview "bat --color=always --style=numbers --line-range=:100 {}/README.*")"
   if [ -n "$destination_dir" ]; then
     BUFFER="code ${destination_dir}"
     zle accept-line
