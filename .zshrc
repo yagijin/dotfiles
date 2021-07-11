@@ -36,14 +36,15 @@ google() {
     open -a Google\ Chrome http://www.google.co.jp/$opt
 }
 
-# ghq + fzfの設定
+# go（ghqに使う）の設定
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 
+# ghqの管理フォルダにfzfで簡単に移動できるようにする
 function ghq_list_cd() {
-  local destination_dir="$(ghq list -p | fzf --ansi --preview "head -100 {}/README.*")"
+  local destination_dir="$(ghq list -p | fzf --preview "head -100 {}/README.*")"
   if [ -n "$destination_dir" ]; then
-    BUFFER="cd ${destination_dir}"
+    BUFFER="code ${destination_dir}"
     zle accept-line
   fi
   zle clear-screen
@@ -51,7 +52,7 @@ function ghq_list_cd() {
 zle -N ghq_list_cd
 bindkey '^]' ghq_list_cd
 
-# fzfを使った関数
+# gitのブランチを一覧から選んでチェックアウト
 fbr() {
   local branches branch
   branches=$(git branch -vv) &&
@@ -59,8 +60,17 @@ fbr() {
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-alias fzc="fzf --preview 'head -100 {}'"
+# batでプレビューしながらfzfで検索
+alias fzc="fzf --preview 'bat --color=always --style=numbers --line-range=:100 {}'"
 
+# fzf検索 + cd
+fd() {
+  local dir
+  dir=$(find . -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# fzfの基本設定
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 100% --reverse --border'
 
@@ -84,8 +94,25 @@ setopt hist_ignore_dups
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
-#starshipの読み込み
-eval "$(starship init zsh)"
-
 #thefuckの読み込み
 eval $(thefuck --alias)
+
+# manコマンドの設定：batを使用してmanコマンドに色を付ける
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# gitの情報を表示する
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{magenta}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{yellow}+"
+zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { 
+  vcs_info
+  print "" #add new line after command
+}
+
+# プロンプトをカスタマイズ
+setopt prompt_subst #PROMPT変数内で変数展開する
+PROMPT='🐏%F{green}%c%f 🐐$vcs_info_msg_0_
+%F{green}$%f '

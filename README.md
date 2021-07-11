@@ -2,7 +2,7 @@
 setting files for my tools
 
 ## .zshrc
-oh my zshは使わない方針
+oh my zshやstarshipは使わない方針
 
 ## .vscode
 
