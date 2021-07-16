@@ -13,4 +13,7 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "npm.enableRunFromFolder": true,
   "editor.minimap.enabled": false,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
 }

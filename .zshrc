@@ -40,11 +40,11 @@ google() {
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 
-# ghqの管理フォルダにfzfで簡単に移動できるようにする
+# ghqの管理フォルダをfzfで簡単にcodeで開けるようにする
 function ghq_list_cd() {
-  local destination_dir="$(ghq list -p | fzf --preview "bat --color=always --style=numbers --line-range=:100 {}/README.*")"
+  local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 {}/README.*")"
   if [ -n "$destination_dir" ]; then
-    BUFFER="code ${destination_dir}"
+    BUFFER="code $(ghq root)/${destination_dir} && exit"
     zle accept-line
   fi
   zle clear-screen
