@@ -42,7 +42,7 @@ export PATH=$PATH:$GOPATH/bin
 
 # ghqの管理フォルダをfzfで簡単にcodeで開けるようにする
 function ghq_list_cd() {
-  local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 {}/README.*")"
+  local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")"
   if [ -n "$destination_dir" ]; then
     BUFFER="code $(ghq root)/${destination_dir} && exit"
     zle accept-line
@@ -71,7 +71,7 @@ fd() {
 }
 
 # fzfの基本設定
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 100% --reverse --border'
 
 # tabでコマンドのオプションやファイル名を保管してくれる

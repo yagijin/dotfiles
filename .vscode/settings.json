@@ -16,4 +16,11 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": true,
+    "markdown": false
+  },
+  "go.toolsManagement.autoUpdate": true,
 }
