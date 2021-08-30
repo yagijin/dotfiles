@@ -41,7 +41,7 @@ export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 
 # ghqの管理フォルダをfzfで簡単にcodeで開けるようにする
-function ghq_list_cd() {
+function ghq_code() {
   local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")"
   if [ -n "$destination_dir" ]; then
     BUFFER="code $(ghq root)/${destination_dir} && exit"
@@ -49,8 +49,20 @@ function ghq_list_cd() {
   fi
   zle clear-screen
 }
-zle -N ghq_list_cd
-bindkey '^]' ghq_list_cd
+zle -N ghq_code
+bindkey '^]' ghq_code
+
+# ghqの管理フォルダをfzfで簡単にcdできるようにする
+function ghq_cd() {
+  local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")"
+  if [ -n "$destination_dir" ]; then
+    BUFFER="cd $(ghq root)/${destination_dir}"
+    zle accept-line
+  fi
+  zle clear-screen
+}
+zle -N ghq_cd
+bindkey '^[' ghq_cd
 
 # gitのブランチを一覧から選んでチェックアウト
 fbr() {
