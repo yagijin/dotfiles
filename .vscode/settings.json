@@ -16,6 +16,7 @@
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
+  "editor.bracketPairColorization.enabled": true,
   "github.copilot.enable": {
     "*": true,
     "yaml": false,
