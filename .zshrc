@@ -11,6 +11,7 @@ alias la="ls -a"
 alias g="git"
 alias gl="git log"
 alias gs="git status"
+alias gst="git stash -u"
 alias ga="git add"
 alias gc="git commit -m"
 alias gca="git commit --amend"
@@ -40,29 +41,9 @@ google() {
 export GOPATH=$HOME
 export PATH=$PATH:$GOPATH/bin
 
-# ghqの管理フォルダをfzfで簡単にcodeで開けるようにする
-function ghq_code() {
-  local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")"
-  if [ -n "$destination_dir" ]; then
-    BUFFER="code $(ghq root)/${destination_dir} && exit"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N ghq_code
-bindkey '^]' ghq_code
-
-# ghqの管理フォルダをfzfで簡単にcdできるようにする
-function ghq_cd() {
-  local destination_dir="$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")"
-  if [ -n "$destination_dir" ]; then
-    BUFFER="cd $(ghq root)/${destination_dir}"
-    zle accept-line
-  fi
-  zle clear-screen
-}
-zle -N ghq_cd
-bindkey '^[' ghq_cd
+# ghqの管理フォルダをfzfで簡単にcdしたり、codeで開けるようにする
+alias gcd='cd $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")'
+alias gcode='code $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*") && exit'
 
 # gitのブランチを一覧から選んでチェックアウト
 fbr() {
@@ -128,3 +109,8 @@ precmd () {
 setopt prompt_subst #PROMPT変数内で変数展開する
 PROMPT='🐏%F{green}%c%f 🐐$vcs_info_msg_0_
 %F{green}$%f '
+
+# オレオレ設定たち
+
+# 改行と空白を無視する
+alias 'diff!'='diff -Bw'
