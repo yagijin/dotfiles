@@ -8,18 +8,18 @@ fi
 #ls時にフォルダとファイルを色分けしてわかりやすくする
 alias ls="ls -Fh -G"
 alias la="ls -a"
+#alias rm="echo 'use mv instead of rm'"
+
+# git関連のエイリアス（.gitconfigにも記載がある）
 alias g="git"
-alias gl="git log"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gs="git status"
 alias gst="git stash -u"
-alias ga="git add"
+alias ga="git add ."
 alias gc="git commit -m"
 alias gca="git commit --amend"
-alias gpl="git pull"
-alias gps="git push"
 alias gco="git checkout"
-alias ggl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-#alias rm="echo 'use mv instead of rm'"
+
 
 #ipの確認
 alias gip="curl http://ipecho.net/plain; echo"
@@ -45,6 +45,9 @@ export PATH=$PATH:$GOPATH/bin
 alias gcd='cd $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")'
 alias gcode='code $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*") && exit'
 
+# batでプレビューしながらfzfで検索
+alias fzc="fzf --preview 'bat --color=always --style=numbers --line-range=:100 {}'"
+
 # gitのブランチを一覧から選んでチェックアウト
 fbr() {
   local branches branch
@@ -52,9 +55,6 @@ fbr() {
   branch=$(echo "$branches" | fzf +m) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
-
-# batでプレビューしながらfzfで検索
-alias fzc="fzf --preview 'bat --color=always --style=numbers --line-range=:100 {}'"
 
 # fzf検索 + cd
 fd() {
@@ -77,13 +77,8 @@ setopt auto_cd
 setopt auto_pushd
 # ディレクトリスタックに重複するパスのうち古い方を削除
 setopt pushd_ignore_dups
-
-# バックグランドジョブの終了時に通知
-setopt no_tify
-
 # 直前と同じコマンドを履歴に追加しない
 setopt hist_ignore_dups
-
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
@@ -110,7 +105,6 @@ setopt prompt_subst #PROMPT変数内で変数展開する
 PROMPT='🐏%F{green}%c%f 🐐$vcs_info_msg_0_
 %F{green}$%f '
 
-# オレオレ設定たち
-
+## コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
 # 改行と空白を無視する
 alias 'diff!'='diff -Bw'
