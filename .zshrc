@@ -8,6 +8,7 @@ fi
 #ls時にフォルダとファイルを色分けしてわかりやすくする
 alias ls="ls -Fh -G"
 alias la="ls -a"
+alias man="tldr"
 #alias rm="echo 'use mv instead of rm'"
 
 # git関連のエイリアス（.gitconfigにも記載がある）
@@ -20,6 +21,16 @@ alias gc="git commit -m"
 alias gca="git commit --amend"
 alias gco="git checkout"
 
+# リポジトリのrootにcd
+root() {
+  git_dir="$(git rev-parse --show-toplevel 2> /dev/null)"
+    if [ -z $git_dir ]
+    then
+      cd ..
+    else
+      cd "$git_dir"
+    fi
+}
 
 #ipの確認
 alias gip="curl http://ipecho.net/plain; echo"
