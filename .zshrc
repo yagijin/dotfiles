@@ -8,7 +8,7 @@ fi
 #ls時にフォルダとファイルを色分けしてわかりやすくする
 alias ls="ls -Fh -G"
 alias la="ls -a"
-alias man="tldr"
+alias sl="ls"
 #alias rm="echo 'use mv instead of rm'"
 
 # git関連のエイリアス（.gitconfigにも記載がある）
@@ -99,6 +99,8 @@ eval $(thefuck --alias)
 # manコマンドの設定：batを使用してmanコマンドに色を付ける
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+
+
 # gitの情報を表示する
 autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -106,9 +108,27 @@ zstyle ':vcs_info:git:*' stagedstr "%F{magenta}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{yellow}+"
 zstyle ':vcs_info:*' formats "%F{cyan}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
+
+# cd後にlaするためのトリガー
+cdla () {
+  # on or off
+  export CDLA_STATE=$1
+  echo "CDLA_STATE: $1"
+}
+alias cdls="cdla"
+
+# before show command-prompt
 precmd () { 
   vcs_info
   print "" #add new line after command
+}
+
+## when current directry changed
+chpwd() {
+  # ls -aする
+  if [ "$CDLA_STATE" = "on" ]; then;
+    la
+  fi
 }
 
 # プロンプトをカスタマイズ
@@ -119,3 +139,6 @@ PROMPT='🐏%F{green}%c%f 🐐$vcs_info_msg_0_
 ## コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
 # 改行と空白を無視する
 alias 'diff!'='diff -Bw'
+# manをマニュアルではなく用例集にする
+alias 'man!'='tldr'
+
