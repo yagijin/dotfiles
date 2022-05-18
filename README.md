@@ -2,6 +2,12 @@
 
 dotfilesを管理するためのリポジトリ。
 
+
+以下のコマンドで設定ができる。
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/yagijin/setting_files/HEAD/install_settingfiles.sh"
+```
+
 # .zshrc
 
 重くなるので、oh my zshやstarshipは使わない方針。
