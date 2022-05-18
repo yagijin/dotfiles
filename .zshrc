@@ -32,9 +32,20 @@ root() {
     fi
 }
 
+## コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
+# 改行と空白を無視する
+alias 'diff!'='diff -Bw'
+# manをマニュアルではなく用例集にする
+alias 'man!'='tldr'
+
+# kubectlのエイリアス
+alias 'k'='kubectl'
+
 #ipの確認
 alias gip="curl http://ipecho.net/plain; echo"
 alias lip="ifconfig en0 | awk '/inet / { print \$2 }'"
+# ファイルの特定行をclipする
+alias 'clip'='(){cat -n $1 | sed -n $2,$3p}'
 
 # Google Chromeで検索する
 google() {
@@ -99,8 +110,6 @@ eval $(thefuck --alias)
 # manコマンドの設定：batを使用してmanコマンドに色を付ける
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-
-
 # gitの情報を表示する
 autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' check-for-changes true
@@ -135,10 +144,3 @@ chpwd() {
 setopt prompt_subst #PROMPT変数内で変数展開する
 PROMPT='🐏%F{green}%c%f 🐐$vcs_info_msg_0_
 %F{green}$%f '
-
-## コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
-# 改行と空白を無視する
-alias 'diff!'='diff -Bw'
-# manをマニュアルではなく用例集にする
-alias 'man!'='tldr'
-
