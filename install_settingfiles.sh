@@ -4,9 +4,8 @@ echo "🍜 start"
 
 cd ~ || exit
 
-# 作業フォルダの作成
-mkdir temp
-cd temp || exit
+# macの場合、xcodeのデベロッパーツールをインストールする
+xcode-select --install
 
 # homebrewのinstall
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
