@@ -14,6 +14,7 @@ GitHub.vscode-pull-request-github
 golang.go
 GraphQL.vscode-graphql
 hashicorp.terraform
+ICS.japanese-proofreading
 James-Yu.latex-workshop
 mgmcdermott.vscode-language-babel
 mosapride.zenkaku
@@ -22,15 +23,16 @@ ms-vscode-remote.remote-containers
 ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode.cpptools
+ms-vscode.js-debug-nightly
 ms-vscode.vscode-typescript-next
 ms-vsliveshare.vsliveshare
-msjsdiag.debugger-for-chrome
 Orta.vscode-jest
 rebornix.ruby
 ritwickdey.LiveServer
 ryu1kn.partial-diff
 sianglim.slim
 sidthesloth.html5-boilerplate
+silvenon.mdx
 streetsidesoftware.code-spell-checker
 timonwong.shellcheck
 vscode-icons-team.vscode-icons
