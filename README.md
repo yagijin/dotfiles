@@ -1,59 +1,60 @@
 # setting_files
-setting files for my tools
 
-## .zshrc
-oh my zshやstarshipは使わない方針
+dotfilesを管理するためのリポジトリ。
 
-## .vscode
+# .zshrc
 
-`code --list-extensions > .extensions`で拡張機能一覧を.extensionsに出力．   
-.extensionsと同じディレクトリでinstall_extensions.shを実行して拡張機能をインストール．    
-~/Library/Application Support/Code/User/setting.jsonをシンボリックリンクにする．  
+重くなるので、oh my zshやstarshipは使わない方針。
 
-## prettier と eslint の環境構築
+# .vscode
 
-### npm install
-`npm install eslint --save-dev`  
-`npm install --save-dev --save-exact prettier`  
-`npm install --save-dev eslint-config-prettier`
+vscodeの設定（setting.json）と拡張機能を管理する。
+## インストール手順
 
-### vscode に拡張機能を入れる
-eslint  
-prettier
+- 拡張機能を出力
+  - `code --list-extensions > .extensions`
+- 拡張機能をインストール
+  - `cd ./.vscode && ./install_extensions.sh`
+- settings.jsonのシンボリックを貼る
+  - `ln -s ~/Library/Application Support/Code/User/settings.json ~`
 
-### その他できること
-Git にはコミット前に指定のスクリプトを実行できる pre-commit フックと言う仕組みがあるため，それを利用して commite 前にコードを検査，整形することもできる．
+# .prettierrc と .eslintrc
 
-### 参考サイト
-https://prettier.io/docs/en/integrating-with-linters.html  
-https://qiita.com/soarflat/items/06377f3b96964964a65d
+prettierとeslintの設定ファイル。
+`.vscode`にvscodeでの自動フォーマットのための設定がある。
 
-## starship.toml
+- インストール
+  - `yarn add eslint prettier eslint-config-prettier --dev`
 
-starshipの設定．
-現在は使用していません．
+## todo
 
-## Homebrew 
+pre-commitフックでcommit前にコードを検査、整形する。
 
-### brewfileからインストール
-`brew bundle`
 
-### brewfileに一覧を出力
-`brew bundle dump`
+# starship.toml
 
-### brewfileに入っていないファイルを削除
-`brew bundle cleanup`
+starshipの設定。
+現在は使用していません。
 
-### brewのプログラム
+# Homebrew
 
-#### ghq
-https://github.com/x-motemen/ghq  
-https://github.com/Songmu/ghq-handbooks
+- brewfileに一覧を出力
+  - `brew bundle dump`
+- brewfileからインストール
+  - `brew bundle`
+- brewfileに入っていないファイルを削除
+  - `brew bundle cleanup`
+
+# brewでインストールされるアプリケーション
+
+## ghq
+
+- https://zuruzurura.men/blog/2021-08-23-ghq%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E3%81%8B%E3%82%89%E4%BD%BF%E3%81%84%E6%96%B9%E3%81%BE%E3%81%A7/
+- https://github.com/x-motemen/ghq  
+- https://github.com/Songmu/ghq-handbooks
 
 # その他操作
-## 指定したディレクトリにシンボリックリンクを追加する(-fで強制上書きも可能)
+
+## 指定したディレクトリにシンボリックリンクを追加する(-f で強制上書きも可能)
+
 `ln -s ファイル名 ディレクトリ`
-
-
-
-
