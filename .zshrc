@@ -1,4 +1,4 @@
-## zsh自体の設定
+## 🍜 zsh自体の設定
 
 # tabでコマンドのオプションやファイル名を保管してくれる
 autoload -U compinit
@@ -28,7 +28,7 @@ setopt prompt_subst #PROMPT変数内で変数展開する
 PROMPT='🐏%F{green}%c%f 🐐$vcs_info_msg_0_
 %F{green}$%f '
 
-## その他設定
+## 🍜 その他設定
 
 # .zshrc.localに切り出したPC固有の処理を読み込む
 if [ -f "$(ghq root)/github.com/yagijin/setting_files/.zshrc.local" ]; then
@@ -50,7 +50,7 @@ export PATH=$PATH:$GOPATH/bin
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 100% --reverse --border'
 
-## エイリアス
+## 🍜 エイリアス
 
 #ls時にフォルダとファイルを色分けしてわかりやすくする
 alias ls="ls -Fh -G"
@@ -67,12 +67,10 @@ alias ga="git add ."
 alias gc="git commit -m"
 alias gca="git commit --amend"
 alias gco="git checkout"
-
-## コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
-# 改行と空白を無視する
-alias 'diff!'='diff -Bw'
-# manをマニュアルではなく用例集にする
-alias 'man!'='tldr'
+# リポジトリのrootにcd
+alias root='if [ -z "$(git rev-parse --show-toplevel 2> /dev/null)" ]; then; cd .. ; else; cd "$(git rev-parse --show-toplevel 2> /dev/null)"; fi'
+# gitのブランチを一覧から選んでチェックアウト
+alias fbr='git branch -vv | fzf +m | awk "{print \$2}" | sed "s/.* //" | xargs git checkout'
 
 # kubectlのエイリアス
 alias 'k'='kubectl'
@@ -84,25 +82,30 @@ alias lip="ifconfig en0 | awk '/inet / { print \$2 }'"
 # ファイルの特定行をclipする
 alias 'clip'='(){cat -n $1 | sed -n $2,$3p}'
 
-# ghqの管理フォルダをfzfで簡単にcdしたり、codeで開けるようにする
-alias gcd='cd $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")'
-alias gcode='code $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*") && exit'
+## 🍜 コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
+
+# 改行と空白を無視する
+alias 'diff!'='diff -Bw'
+
+# manをマニュアルではなく用例集にする
+alias 'man!'='tldr'
+
+# historyからコマンドウィンドウに入力
+alias 'history!'='last_command=$(history -n -r 1 | awk "!a[\$1]++" | fzf --no-sort +m --prompt="History > ") && printf "%s\n\n" $last_command && eval $last_command'
 
 # batでプレビューしながらfzfで検索
-alias fzc="fzf --preview 'bat --color=always --style=numbers --line-range=:100 {}'"
+alias 'find!'="fzf --preview 'bat --color=always --style=numbers --line-range=:100 {}'"
 
-## 独自関数
+# ghqの管理フォルダにfzfで簡単にcdする
+alias 'ghq!'='cd $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*")'
 
-# リポジトリのrootにcd
-root() {
-  git_dir="$(git rev-parse --show-toplevel 2> /dev/null)"
-    if [ -z $git_dir ]
-    then
-      cd ..
-    else
-      cd "$git_dir"
-    fi
-}
+# ghqの管理フォルダにfzfで簡単にcodeで開く
+alias 'code!'='code $(ghq root)/$(ghq list | fzf --preview "bat --color=always --style=numbers --line-range=:100 $(ghq root)/{}/README.*") && exit'
+
+# fzf検索 + cd
+alias 'cd!'='cd $(find . -path "*/\.*" -prune -o -type d -print 2> /dev/null | fzf +m)'
+
+## 🍜 独自関数
 
 # Google Chromeで検索する
 google() {
@@ -116,21 +119,6 @@ google() {
     open -a Google\ Chrome http://www.google.co.jp/$opt
 }
 
-# gitのブランチを一覧から選んでチェックアウト
-fbr() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-}
-
-# fzf検索 + cd
-fd() {
-  local dir
-  dir=$(find . -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
-
 # cd後にlaするためのトリガー
 cdla () {
   # on or off
@@ -138,7 +126,7 @@ cdla () {
   echo "CDLA_STATE: $1"
 }
 
-## zshのhook関数
+## 🍜 zshのhook関数
 
 # before show command-prompt
 precmd () { 
