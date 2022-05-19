@@ -70,7 +70,7 @@ alias gco="git checkout"
 # リポジトリのrootにcd
 alias root='if [ -z "$(git rev-parse --show-toplevel 2> /dev/null)" ]; then; cd .. ; else; cd "$(git rev-parse --show-toplevel 2> /dev/null)"; fi'
 # gitのブランチを一覧から選んでチェックアウト
-alias fbr='git branch -vv | fzf +m | awk "{print \$2}" | sed "s/.* //" | xargs git checkout'
+alias fbr='git branch -vv | fzf +m | awk "{print \$2}" | xargs git checkout'
 
 # kubectlのエイリアス
 alias 'k'='kubectl'
