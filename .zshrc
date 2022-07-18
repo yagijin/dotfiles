@@ -63,15 +63,14 @@ alias g="git"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gs="git status"
 alias gst="git stash -u"
-alias ga="git add ."
+alias ga="git status -s | awk '{print \$2}' | fzf -m --preview 'git diff --color --histogram {}' | xargs -I arg git add arg"
 alias gc="git commit -m"
 alias gca="git commit --amend"
 alias gco="git checkout"
 # リポジトリのrootにcd
 alias root='if [ -z "$(git rev-parse --show-toplevel 2> /dev/null)" ]; then; cd .. ; else; cd "$(git rev-parse --show-toplevel 2> /dev/null)"; fi'
 # gitのブランチを一覧から選んでチェックアウト
-alias fbr='git branch | tr -d " *" | fzf +m --preview "git log --first-parent --graph --abbrev-commit --decorate --color=always" | xargs git switch'
-
+alias fbr='git branch | tr -d " *" | fzf +m --preview "git log --first-parent --graph --abbrev-commit --decorate --color=always {}" | xargs git switch'
 
 # kubectlのエイリアス
 alias 'k'='kubectl'
