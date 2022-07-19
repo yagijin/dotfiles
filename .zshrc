@@ -52,35 +52,29 @@ export FZF_DEFAULT_OPTS='--height 100% --reverse --border'
 
 ## 🍜 エイリアス
 
-#ls時にフォルダとファイルを色分けしてわかりやすくする
+# ls時にフォルダとファイルを色分けしてわかりやすくする
 alias ls="ls -Fh -G"
 alias la="ls -a"
-alias sl="ls"
-#alias rm="echo 'use mv instead of rm'"
+# alias rm="mv $1 ~/.Trash"
 
 # git関連のエイリアス（.gitconfigにも記載がある）
-alias g="git"
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gs="git status"
 alias gst="git stash -u"
 alias ga="git status -s | awk '{print \$2}' | fzf -m --preview 'git diff --color --histogram {}' | xargs -I arg git add arg"
 alias gc="git commit -m"
 alias gca="git commit --amend"
-alias gco="git checkout"
 # リポジトリのrootにcd
 alias root='if [ -z "$(git rev-parse --show-toplevel 2> /dev/null)" ]; then; cd .. ; else; cd "$(git rev-parse --show-toplevel 2> /dev/null)"; fi'
 # gitのブランチを一覧から選んでチェックアウト
 alias fbr='git branch | tr -d " *" | fzf +m --preview "git log --first-parent --graph --abbrev-commit --decorate --color=always {}" | xargs git switch'
 
 # kubectlのエイリアス
-alias 'k'='kubectl'
+alias k="kubectl"
 
-#ipの確認
+# ipの確認
 alias gip="curl http://ipecho.net/plain; echo"
 alias lip="ifconfig en0 | awk '/inet / { print \$2 }'"
-
-# ファイルの特定行をclipする
-alias 'clip'='(){cat -n $1 | sed -n $2,$3p}'
 
 ## 🍜 コマンドに!をつけたもので自分のデフォルトのオプションを使うようにする
 
@@ -105,39 +99,17 @@ alias 'code!'='code $(ghq root)/$(ghq list | fzf --preview "bat --color=always -
 # fzf検索 + cd
 alias 'cd!'='cd $(find . -path "*/\.*" -prune -o -type d -print 2> /dev/null | fzf +m)'
 
-## 🍜 独自関数
-
-# Google Chromeで検索する
-google() {
-    local str opt
-    if [ $# != 0 ]; then
-        for i in $*; do
-            str="$str${str:++}$i"
-        done
-        opt="search?num=100&q=${str}"
-    fi
-    open -a Google\ Chrome http://www.google.co.jp/$opt
-}
-
-# cd後にlaするためのトリガー
-cdla () {
-  # on or off
-  export CDLA_STATE=$1
-  echo "CDLA_STATE: $1"
-}
 
 ## 🍜 zshのhook関数
 
-# before show command-prompt
+# called before show command-prompt
 precmd () { 
   vcs_info
-  print "" #add new line after command
+  print "" # add new line after command
 }
 
-## when current directry changed
+## called after current directry changed
 chpwd() {
-  # ls -aする
-  if [ "$CDLA_STATE" = "on" ]; then;
-    la
-  fi
+  echo "## 🐿 LS Current Directory"
+  ls -a
 }
