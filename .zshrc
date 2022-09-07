@@ -107,8 +107,10 @@ alias 'cd!'='cd $(find . -path "*/\.*" -prune -o -type d -print 2> /dev/null | f
 # 最後にアップデートした時刻をファイルに残す
 function update() {
   # homebrewのアップデート & brewパッケージの一括アップデート
+  echo " # Homebrew Packages"
   brew upgrade
   # リポジトリの一括アップデート
+  echo " # Git Repositories"
   ghq list | ghq get --update --parallel
   # 更新日時をファイルに残す
   date +%s > "$(ghq root)/github.com/yagijin/setting_files/last_updated"

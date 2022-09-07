@@ -50,6 +50,8 @@ starshipの設定。
   - `brew bundle`
 - brewfileに入っていないファイルを削除
   - `brew bundle cleanup`
+- brew内の依存をtreeでみる
+  - `brew deps --installed --tree`
 
 # brewでインストールされるアプリケーション
 
