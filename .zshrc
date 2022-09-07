@@ -57,6 +57,9 @@ alias ls="ls -Fh -G"
 alias la="ls -a"
 # alias rm="mv $1 ~/.Trash"
 
+# kubectlのエイリアス
+alias k="kubectl"
+
 # git関連のエイリアス（.gitconfigにも記載がある）
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gs="git status"
@@ -65,12 +68,10 @@ alias ga="git status -s | awk '{print \$2}' | fzf -m --preview 'git diff --color
 alias gc="git commit -m"
 alias gca="git commit --amend"
 # リポジトリのrootにcd
+
 alias root='if [ -z "$(git rev-parse --show-toplevel 2> /dev/null)" ]; then; cd .. ; else; cd "$(git rev-parse --show-toplevel 2> /dev/null)"; fi'
 # gitのブランチを一覧から選んでチェックアウト
 alias fbr='git branch | tr -d " *" | fzf +m --preview "git log --first-parent --graph --abbrev-commit --decorate --color=always {}" | xargs git switch'
-
-# kubectlのエイリアス
-alias k="kubectl"
 
 # ipの確認
 alias gip="curl http://ipecho.net/plain; echo"
@@ -100,12 +101,40 @@ alias 'code!'='code $(ghq root)/$(ghq list | fzf --preview "bat --color=always -
 alias 'cd!'='cd $(find . -path "*/\.*" -prune -o -type d -print 2> /dev/null | fzf +m)'
 
 
+## 🍜 便利関数
+
+# パッケージのアップデート
+# 最後にアップデートした時刻をファイルに残す
+function update() {
+  # homebrewのアップデート & brewパッケージの一括アップデート
+  brew upgrade
+  # リポジトリの一括アップデート
+  ghq list | ghq get --update --parallel
+  # 更新日時をファイルに残す
+  date +%s > "$(ghq root)/github.com/yagijin/setting_files/last_updated"
+}
+
+# 最後にパッケージアップデートした時から一定時間経っているか判定
+function should_update() {
+  now=`date +%s`
+  date_file="$(ghq root)/github.com/yagijin/setting_files/last_updated"
+  will_update="$(($(cat $date_file)+86400))"
+  if [ $now -gt $will_update ]
+  then
+    echo ' ##################################################\n It'"'"'s Time.\n You Should Update Packages Using #update Command🫵\n ##################################################\n'
+  fi
+}
+
+
 ## 🍜 zshのhook関数
 
 # called before show command-prompt
 precmd () { 
   vcs_info
+  
   print "" # add new line after command
+
+  should_update
 }
 
 ## called after current directry changed
