@@ -123,7 +123,9 @@ function should_update() {
   will_update="$(($(cat $date_file)+86400))"
   if [ $now -gt $will_update ]
   then
-    echo ' ##################################################\n It'"'"'s Time.\n You Should Update Packages Using #update Command🫵\n ##################################################\n'
+    echo ' ##################################################\n' \
+      'It'"'"'s Time.\n You Should Update Packages Using #update Command🫵\n' \
+      '##################################################'
   fi
 }
 
