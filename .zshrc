@@ -113,13 +113,13 @@ function update() {
   echo " # Git Repositories"
   ghq list | ghq get --update --parallel
   # 更新日時をファイルに残す
-  date +%s > "$(ghq root)/github.com/yagijin/setting_files/last_updated"
+  date +%s > "$(ghq root)/github.com/yagijin/setting_files/tmp/last_updated"
 }
 
 # 最後にパッケージアップデートした時から一定時間経っているか判定
 function should_update() {
   now=`date +%s`
-  date_file="$(ghq root)/github.com/yagijin/setting_files/last_updated"
+  date_file="$(ghq root)/github.com/yagijin/setting_files/tmp/last_updated"
   will_update="$(($(cat $date_file)+86400))"
   if [ $now -gt $will_update ]
   then
