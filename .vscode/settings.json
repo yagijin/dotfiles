@@ -17,12 +17,6 @@
     "editor.defaultFormatter": "vscode.html-language-features"
   },
   "editor.bracketPairColorization.enabled": true,
-  "github.copilot.enable": {
-    "*": true,
-    "yaml": false,
-    "plaintext": true,
-    "markdown": false
-  },
   "go.toolsManagement.autoUpdate": true,
   "japanese-proofreading.textlint.外来語カタカナ表記": false,
   "[markdown]": {

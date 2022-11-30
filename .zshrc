@@ -145,4 +145,5 @@ precmd () {
 chpwd() {
   echo "## 🐿 LS Current Directory"
   ls -a
+  echo "\n"
 }
