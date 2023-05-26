@@ -120,7 +120,7 @@ function update() {
 function should_update() {
   now=`date +%s`
   date_file="$(ghq root)/github.com/yagijin/setting_files/tmp/last_updated"
-  will_update="$(($(cat $date_file)+86400))"
+  will_update="$(($(cat $date_file)+604800))"
   if [ $now -gt $will_update ]
   then
     echo ' ##################################################\n' \
