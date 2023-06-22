@@ -37,7 +37,10 @@ fi
 
 # アップデート方法：brew upgrade nodenv node-build
 eval "$(nodenv init -)"
-eval "$(rbenv init -)"
+
+[[ -d ~/.rbenv  ]] && \
+  export PATH=${HOME}/.rbenv/bin:${PATH} && \
+  eval "$(rbenv init - zsh)"
 
 # manコマンドの設定：batを使用してmanコマンドに色を付ける
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
